@@ -141,7 +141,7 @@ ScriptLoaded.TextWrapped = true
 
 -- Scripts:
 
-local function XSWPA_fake_script() -- Gui.LocalScript 
+local function TBDXKED_fake_script() -- Gui.LocalScript 
 	local script = Instance.new('LocalScript', Gui)
 
 	if game.PlaceId == 286090429 then
@@ -230,6 +230,9 @@ local function XSWPA_fake_script() -- Gui.LocalScript
 		local TextLabel_6 = Instance.new("TextLabel")
 		local Default = Instance.new("TextButton")
 		local UICorner_7 = Instance.new("UICorner")
+		local AIMLOCK = Instance.new("ImageButton")
+		local UICorner_8 = Instance.new("UICorner")
+		local TextLabel_7 = Instance.new("TextLabel")
 	
 		--Properties:
 	
@@ -306,7 +309,7 @@ local function XSWPA_fake_script() -- Gui.LocalScript
 		Hide.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
 		Hide.BackgroundTransparency = 1.000
 		Hide.Position = UDim2.new(0.925918996, 0, 0, 0)
-		Hide.Size = UDim2.new(0, 35, 0, 35)
+		Hide.Size = UDim2.new(0.0740809515, 0, 1, 0)
 		Hide.Font = Enum.Font.SourceSansBold
 		Hide.LineHeight = 1.140
 		Hide.Text = "-"
@@ -318,8 +321,8 @@ local function XSWPA_fake_script() -- Gui.LocalScript
 		TextLabel_4.Parent = Hide
 		TextLabel_4.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
 		TextLabel_4.BackgroundTransparency = 1.000
-		TextLabel_4.Position = UDim2.new(-2.82857132, 0, 0.171428576, 0)
-		TextLabel_4.Size = UDim2.new(0, 99, 0, 23)
+		TextLabel_4.Position = UDim2.new(-3.27796435, 0, 0.143542811, 0)
+		TextLabel_4.Size = UDim2.new(3.27796412, 0, 0.665366292, 0)
 		TextLabel_4.Font = Enum.Font.SourceSans
 		TextLabel_4.Text = "RightControl to hide"
 		TextLabel_4.TextColor3 = Color3.fromRGB(102, 102, 102)
@@ -403,9 +406,31 @@ local function XSWPA_fake_script() -- Gui.LocalScript
 	
 		UICorner_7.Parent = Default
 	
+		AIMLOCK.Name = "AIMLOCK"
+		AIMLOCK.Parent = Frame
+		AIMLOCK.BackgroundColor3 = Color3.fromRGB(62, 62, 62)
+		AIMLOCK.Position = UDim2.new(0.0604166538, 0, 0.727272749, 0)
+		AIMLOCK.Size = UDim2.new(0.118452683, 0, 0.178236052, 0)
+		AIMLOCK.Image = "rbxassetid://6609332516"
+	
+		UICorner_8.CornerRadius = UDim.new(0, 100)
+		UICorner_8.Parent = AIMLOCK
+	
+		TextLabel_7.Parent = AIMLOCK
+		TextLabel_7.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+		TextLabel_7.BackgroundTransparency = 1.000
+		TextLabel_7.Position = UDim2.new(-0.422109455, 0, 0.984921932, 0)
+		TextLabel_7.Size = UDim2.new(1.82663119, 0, 0.331660092, 0)
+		TextLabel_7.Font = Enum.Font.SourceSans
+		TextLabel_7.Text = "AIMLOCK"
+		TextLabel_7.TextColor3 = Color3.fromRGB(255, 255, 255)
+		TextLabel_7.TextScaled = true
+		TextLabel_7.TextSize = 14.000
+		TextLabel_7.TextWrapped = true
+	
 		-- Scripts:
 	
-		local function NVHUGC_fake_script() -- Frame_2.LocalScript 
+		local function EGIAS_fake_script() -- Frame_2.LocalScript 
 			local script = Instance.new('LocalScript', Frame_2)
 	
 			local UserInputService = game:GetService("UserInputService")
@@ -441,8 +466,8 @@ local function XSWPA_fake_script() -- Gui.LocalScript
 				end
 			end)
 		end
-		coroutine.wrap(NVHUGC_fake_script)()
-		local function QAURL_fake_script() -- BrianHub.LocalScript 
+		coroutine.wrap(EGIAS_fake_script)()
+		local function MUWRJZ_fake_script() -- BrianHub.LocalScript 
 			local script = Instance.new('LocalScript', BrianHub)
 	
 			local Frame = script.Parent.Frame
@@ -452,6 +477,8 @@ local function XSWPA_fake_script() -- Gui.LocalScript
 			local UNLOCKBUTTON = Frame.Unlock
 			local UNLOCKTEXT = Frame.Unlock.TextLabel
 			local KNIFESBUTTON = Frame.TextButton
+			local AIMLOCKBUTTON = Frame.AIMLOCK
+			local AIMLOCKTEXT = Frame.AIMLOCK.TextLabel
 	
 			Frame.Visible = true
 	
@@ -525,17 +552,56 @@ local function XSWPA_fake_script() -- Gui.LocalScript
 				newmelee.Value = "Dagger"
 			end)
 	
+			AIMLOCKBUTTON.MouseButton1Click:Connect(function()
+				local UIS = game.UserInputService
+				local camera = game.Workspace.CurrentCamera
+				local TS = game.TweenService
+				local tweenInfo = TweenInfo.new(0.25)
+				function getClosest()
+					local closestDistance = math.huge
+					local closestPlayer = nil
+					for i,v in pairs(game.Players:GetChildren()) do
+						if v ~= game.Players.LocalPalyer and v.Team ~= game.Players.LocalPlayer.Team then
+							local distance = (game.Players.LocalPlayer.Character.HumanoidRootPart.Position - v.Character.HumanoidRootPart.Position).magnitude
+							if distance < closestDistance then
+								closestDistance = distance
+								closestPlayer = v
+							end
+						end
+					end
+					return closestPlayer
+				end
+	
+				UIS.InputBegan:Connect(function(input)
+					if input.UserInputType == Enum.UserInputType.E then
+						_G.aim = true
+						while wait() do
+							local tween = TS:Create(camera, tweenInfo, {CFrame = CFrame.new(camera.CFrame.Position, getClosest().Character.HeadPosition)})
+							tween:Play()
+							if _G.aim == false then tween:Cancel() return end
+						end
+					end
+				end)
+	
+				UIS.InputEnded:Connect(function(input)
+					if input.UserInputType == Enum.UserInputType.E then
+						_G.aim = false
+					end
+				end)
+				AIMLOCKTEXT.Text = "Enabled"
+				AIMLOCKTEXT.TextColor3 = Color3.fromRGB(183, 255, 74)
+			end)
+	
 			while wait() do
 				if Frame.TextButton.Karambit.Visible == true then
 					Frame.TextButton.TextLabel.Text = "ˇ"
 				else
 					Frame.TextButton.TextLabel.Text = "^"
 				end
-				Frame.TextButton.Text = "Knife: "..game.Players.LocalPlayer.Data.Melee.Value
 			end
 		end
-		coroutine.wrap(QAURL_fake_script)()
+		coroutine.wrap(MUWRJZ_fake_script)()
 	
 	end
 end
-coroutine.wrap(XSWPA_fake_script)()
+coroutine.wrap(TBDXKED_fake_script)()
