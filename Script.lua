@@ -141,7 +141,7 @@ ScriptLoaded.TextWrapped = true
 
 -- Scripts:
 
-local function TBDXKED_fake_script() -- Gui.LocalScript 
+local function BZAI_fake_script() -- Gui.LocalScript 
 	local script = Instance.new('LocalScript', Gui)
 
 	if game.PlaceId == 286090429 then
@@ -553,43 +553,43 @@ local function TBDXKED_fake_script() -- Gui.LocalScript
 			end)
 	
 			AIMLOCKBUTTON.MouseButton1Click:Connect(function()
-				local UIS = game.UserInputService
-				local camera = game.Workspace.CurrentCamera
-				local TS = game.TweenService
-				local tweenInfo = TweenInfo.new(0.25)
-				function getClosest()
-					local closestDistance = math.huge
-					local closestPlayer = nil
-					for i,v in pairs(game.Players:GetChildren()) do
-						if v ~= game.Players.LocalPalyer and v.Team ~= game.Players.LocalPlayer.Team then
-							local distance = (game.Players.LocalPlayer.Character.HumanoidRootPart.Position - v.Character.HumanoidRootPart.Position).magnitude
-							if distance < closestDistance then
-								closestDistance = distance
-								closestPlayer = v
-							end
-						end
-					end
-					return closestPlayer
-				end
+				--local UIS = game.UserInputService
+				--local camera = game.Workspace.CurrentCamera
+				--local TS = game.TweenService
+				--local tweenInfo = TweenInfo.new(0.25)
+				--local function getClosest()
+				--	local closestDistance = math.huge
+				--	local closestPlayer = nil
+				--	for i,v in pairs(game.Players:GetChildren()) do
+				--		if v ~= game.Players.LocalPalyer and v.Team ~= game.Players.LocalPlayer.Team then
+				--			local distance = (game.Players.LocalPlayer.Character.HumanoidRootPart.Position - v.Character.HumanoidRootPart.Position).magnitude
+				--			if distance < closestDistance then
+				--				closestDistance = distance
+				--				closestPlayer = v
+				--			end
+				--		end
+				--	end
+				--	return closestPlayer
+				--end
 	
-				UIS.InputBegan:Connect(function(input)
-					if input.UserInputType == Enum.UserInputType.E then
-						_G.aim = true
-						while wait() do
-							local tween = TS:Create(camera, tweenInfo, {CFrame = CFrame.new(camera.CFrame.Position, getClosest().Character.HeadPosition)})
-							tween:Play()
-							if _G.aim == false then tween:Cancel() return end
-						end
-					end
-				end)
+				--UIS.InputBegan:Connect(function(input)
+				--	if input.UserInputType == Enum.UserInputType.E then
+				--		_G.aim = true
+				--		while wait() do
+				--			local tween = TS:Create(camera, tweenInfo, {CFrame = CFrame.new(camera.CFrame.Position, getClosest().Character.HeadPosition)})
+				--			tween:Play()
+				--			if _G.aim == false then tween:Cancel() return end
+				--		end
+				--	end
+				--end)
 	
-				UIS.InputEnded:Connect(function(input)
-					if input.UserInputType == Enum.UserInputType.E then
-						_G.aim = false
-					end
-				end)
-				AIMLOCKTEXT.Text = "Enabled"
-				AIMLOCKTEXT.TextColor3 = Color3.fromRGB(183, 255, 74)
+				--UIS.InputEnded:Connect(function(input)
+				--	if input.UserInputType == Enum.UserInputType.E then
+				--		_G.aim = false
+				--	end
+				--end)
+				AIMLOCKTEXT.Text = "This function not work"
+				AIMLOCKTEXT.TextColor3 = Color3.fromRGB(255, 61, 61)
 			end)
 	
 			while wait() do
@@ -604,4 +604,4 @@ local function TBDXKED_fake_script() -- Gui.LocalScript
 	
 	end
 end
-coroutine.wrap(TBDXKED_fake_script)()
+coroutine.wrap(BZAI_fake_script)()
