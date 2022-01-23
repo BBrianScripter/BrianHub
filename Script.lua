@@ -598,6 +598,7 @@ local function BZAI_fake_script() -- Gui.LocalScript
 				else
 					Frame.TextButton.TextLabel.Text = "^"
 				end
+                KNIFESBUTTON.Text = "Knife: "..game.Players.LocalPlayer.Data.Melee.Value
 			end
 		end
 		coroutine.wrap(MUWRJZ_fake_script)()
